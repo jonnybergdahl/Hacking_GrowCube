@@ -161,3 +161,4 @@ cython_debug/
 app/Growcube_1.0_Apkpure.apk.cache
 .hypothesis
 .DS_Store
+*.jadx
