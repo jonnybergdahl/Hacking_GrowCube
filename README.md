@@ -140,12 +140,38 @@ asking for data with a `CurveData` command for plant 0.
 
 ```
 > elea43#1#2#
-> elea48#1#0#
-< elea22#83#0@2023@7@12@00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,95,96,00#
+< elea33#3#0@0#
 ```
 
+Enter plant #1 in  the app. It requests watering data and receives a bunch of packets, one for each
+date. 
+```
+> elea48#1#0#
+< elea22#83#0@2023@7@12@00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,95,96,00#
+< elea22#83#0@2023@7@13@00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00#
+..
+< elea22#83#0@2023@8@10@00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00#
+```
+
+#### Request start watering
+
+```
+> elea47#3#0@1#
+< elea26#1#0#
+> ele506 ??
+< elea21#9#0@0@46@23#
+< ele550
+```
+
+#### Request stop watering
+
+> elea47#3#0@0#
+< elea27#1#0#
+
+
+
 #### Idle traffic
-The Growcube then continues sending out it's usual data stream.
+The Growcube continually sends out a "current state" data stream.
 
 ```
 < elea35#3#0@1#elea23#16#0@2023@6@19@6@38#
@@ -158,6 +184,16 @@ The Growcube then continues sending out it's usual data stream.
 < elea23#16#0@2023@6@26@0@21#
 < elea23#16#0@2023@6@26@0@23#elea23#16#0@2023@6@26@0@25#elea23#15#0@2023@7@1@22@5#
 
+```
+
+#### Connect when device is out of water
+
+```
+> elea44#19#2023@08@10@19@59@31#
+< elea24#11#3.6@2432941#
+< elea33#3#1@1#
+> elea43#1#2#
+< elea21#9#0@0@47@23#
 ```
 
 ## Message format
@@ -179,15 +215,28 @@ These are the "response" values as defined in the app.
 
 Value | Description | Attributes | Sample value
 ---- | ---- | ---- | ----
-20 | RepWaterState | Water warning | 1
+20 | RepWaterState | Water warning | waterEnough = 1
 21 | RepSTHSate | pump #, "st", "th", temperature | 0@50@49@24
-22 | RepCurve | Pump data, pumpnum, yearData[], monthData[], dateData[] |
-23 | RepAutoWater | pump #, time stamp divided (year, month, day, h, m) |
-24 | RepVersionAndWater | version number (second value is ignored) | 3.6@12663500
-25 | RepErasureData | Erasure state |
-26 | RepPumpOpen | pump # | 3
-27 | RepPumpClose | pump # | 3
-33 | (Unknown) | ?? | 0@0
+22 | RepCurveCmd | Pump data, pumpnum, yearData[], monthData[], dateData[] |
+23 | RepAutoWaterCmd | pump #, time stamp divided (year, month, day, h, m) |
+24 | RepDeviceVersionCmd | version number, device num | 3.6@12663500
+25 | RepErasureData | Erasure state | elea25#3#52d# == true
+26 | RepPumpOpenCmd | pump # | 3
+27 | RepPumpCloseCmd | pump # | 3
+28 | ReqCheckSenSorCmd | sensor fault state | 0 / 1 
+29 | ReqCheckDuZhuanCmd | state |
+30 | ReqCheckSenSorNotConnectCmd | state | 
+31 | RepWifistateCmd | state |
+32 | RepGrowCubeIPCmd | GrowCube IP | ???
+33 | RepLockstateCmd | ?, state? | 0@0 / 1@1
+34 | ReqCheckSenSorLockCmd | device locked state | 0@0 / 1@1
+35 | RepCurveEndFlagCmd | ? end flag | 0@1
+
+There also seems to be some responses that does not use the normal syntax.
+
+Value | Description
+---- | ----
+ele550 |Response to ele506?
 
 ## Command values
 
@@ -195,23 +244,26 @@ These are the command values as defined in the app.
 
 Value | Description | Attributes
 ---- | ---- | ---
-43 | ReqSetWorkmode | mode
+28 | ReqSensorExceFlagCmd | pump #
+43 | ReqSetWorkmodeCmd / ReqDirectConnModel | mode / modelType
 44 | ReqSyncTime | Current time
 45 | ReqPlantEnd | pump #
 46 | ReqClosePump | pump #
 47 | ReqWater | pump #, state, 1 = Start pump, 0 = Stop pump 
 48 | ReqCurveData | pump #
-49 | WaterMode | sub data: pump #, mode, min value, max value
-50 | WifiSettings | sub data: WiFi name, WiFi password, "time mils" = KEY_DEVICE_ID
+49 | ReqWaterMode | sub data: pump #, mode, min value, max value
+50 | ReqWifiSettings | sub data: WiFi name, WiFi password, "time mils" = KEY_DEVICE_ID
 
 There also seems to be some commands that does not use the normal syntax.
 
 Value | Description
 ---- | ---
-ele502| SyncWaterLevel
-ele503| SyncWaterTime
-ele504| Device upgrade command
-ele505| Factory reset command
+ele502 | SyncWaterLevelCmd
+ele503 | SyncWaterTimeCmd
+ele504 | ReqDeviceUpgradeCmd
+ele505 | ReqFactoryResetCmd
+ele506 | CheckDeviceOnlineCmd
+ele507 | ResetNetWrokModelCmd
 
 ## Python test scripts
 
