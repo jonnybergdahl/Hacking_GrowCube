@@ -2,7 +2,15 @@
 
 These are my notes reverse engineering the protocl used in Growcube. 
 
-> Note: This is still very much a work in progress
+> Note: This is still a work in progress
+
+## Hardware
+
+![PCB](assets/growcube_hardware_min.png)
+[Bigger image](assets/growcube_hardware.png)
+
+![Pump and valves](assets/growcube_hardware_min2.png)
+[Bigger image](assets/growcube_hardware2.png)
 
 ## Tools used
 
@@ -12,12 +20,13 @@ I used Airtool 2 to sniff network traffic between the app and the device. You co
 
 ## Goal
 
-The end goal of this project is to create a Python Growcube client library, and ultimately a proper Home Assistant integration.
+The end goal of this project was to create a Python Growcube client library, and ultimately a proper Home Assistant integration.
 
-The Python client repository is located [here](https://github.com/jonnybergdahl/Python-growcube-client).
-The Home Assistant integration repository is located [here](https://github.com/jonnybergdahl/homeassistant_growcube).
+The Python client is available on [PyPi](https://pypi.org/project/growcube-client/) , and repository is located [here](https://github.com/jonnybergdahl/Python-growcube-client).
+This repository also contains scripts to discover devices on the network, as well as a complete app that talks to a device. 
 
-> Note: They are both just work in progress.
+
+The Home Assistant integration repository is located [here](https://github.com/jonnybergdahl/homeassistant_growcube). It is work in progress.
 
 ## Android app reverse engineering
 
@@ -213,24 +222,24 @@ data | Data, delimited by # delimiters and sub delimited by @ characters
 
 These are the "response" values as defined in the app.
 
-Value | Description | Attributes | Sample value
----- | ---- | ---- | ----
-20 | RepWaterState | Water warning | waterEnough = 1
-21 | RepSTHSate | pump #, "st", "th", temperature | 0@50@49@24
+Value | Description | Attributes                                              | Sample value
+---- | ---- |---------------------------------------------------------| ----
+20 | RepWaterState | Water warning                                           | waterEnough = 1
+21 | RepSTHSate | pump #, "st", "th", temperature                         | 0@50@49@24
 22 | RepCurveCmd | Pump data, pumpnum, yearData[], monthData[], dateData[] |
-23 | RepAutoWaterCmd | pump #, time stamp divided (year, month, day, h, m) |
-24 | RepDeviceVersionCmd | version number, device num | 3.6@12663500
-25 | RepErasureData | Erasure state | elea25#3#52d# == true
-26 | RepPumpOpenCmd | pump # | 3
-27 | RepPumpCloseCmd | pump # | 3
-28 | ReqCheckSenSorCmd | sensor fault state | 0 / 1 
-29 | ReqCheckDuZhuanCmd | state |
-30 | ReqCheckSenSorNotConnectCmd | state | 
-31 | RepWifistateCmd | state |
-32 | RepGrowCubeIPCmd | GrowCube IP | ???
-33 | RepLockstateCmd | ?, state? | 0@0 / 1@1
-34 | ReqCheckSenSorLockCmd | device locked state | 0@0 / 1@1
-35 | RepCurveEndFlagCmd | ? end flag | 0@1
+23 | RepAutoWaterCmd | pump #, time stamp divided (year, month, day, h, m)     |
+24 | RepDeviceVersionCmd | version number, device num                              | 3.6@12663500
+25 | RepErasureData | Erasure state                                           | elea25#3#52d# == true
+26 | RepPumpOpenCmd | pump #                                                  | 3
+27 | RepPumpCloseCmd | pump #                                                  | 3
+28 | ReqCheckSenSorCmd | sensor fault state                                      | 0 / 1 
+29 | ReqCheckDuZhuanCmd | pump outlet fault state                                 | 3
+30 | ReqCheckSenSorNotConnectCmd | state                                                   | 
+31 | RepWifistateCmd | state                                                   |
+32 | RepGrowCubeIPCmd | GrowCube IP                                             | ???
+33 | RepLockstateCmd | ?, state?                                               | 0@0 / 1@1
+34 | ReqCheckSenSorLockCmd | device locked state                                     | 0@0 / 1@1
+35 | RepCurveEndFlagCmd | ? end flag                                              | 0@1
 
 There also seems to be some responses that does not use the normal syntax.
 
@@ -265,6 +274,5 @@ ele505 | ReqFactoryResetCmd
 ele506 | CheckDeviceOnlineCmd
 ele507 | ResetNetWrokModelCmd
 
-## Python test scripts
+ > Note: Any misspelled words are directly copied from the source code.
 
-Python test scripts have been moved to the [Python library repo](https://github.com/jonnybergdahl/Python-growcube-client).
