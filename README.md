@@ -260,8 +260,12 @@ Value | Description | Attributes
 46 | ReqClosePump | pump #
 47 | ReqWater | pump #, state, 1 = Start pump, 0 = Stop pump 
 48 | ReqCurveData | pump #
-49 | ReqWaterMode | sub data: pump #, mode, min value, max value
-50 | ReqWifiSettings | sub data: WiFi name, WiFi password, "time mils" = KEY_DEVICE_ID
+49 | ReqWaterMode | pump #, mode, min value, max value
+50 | ReqWifiSettings | WiFi name, WiFi password, "time mils" = KEY_DEVICE_ID
+
+ > For command 49, mode 0 = Smart mode settings, 1 = Smart mode outside of daylight, 2 = Manual mode. <br>
+ For Manual mode the last two values are interval and duration. 
+ 
 
 There also seems to be some commands that does not use the normal syntax.
 
