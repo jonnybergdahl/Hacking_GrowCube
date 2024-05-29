@@ -238,7 +238,7 @@ Value | Description | Attributes                                              | 
 31 | RepWifistateCmd | state                                                   |
 32 | RepGrowCubeIPCmd | GrowCube IP                                             | ???
 33 | RepLockstateCmd | ?, state?                                               | 0@0 / 1@1
-34 | ReqCheckSenSorLockCmd | device locked state                                     | 0@0 / 1@1
+34 | ReqCheckSenSorLockCmd | device locked state                                     | 3
 35 | RepCurveEndFlagCmd | ? end flag                                              | 0@1
 
 There also seems to be some responses that does not use the normal syntax.
