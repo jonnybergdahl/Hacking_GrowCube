@@ -129,6 +129,14 @@ Soil moisture sensor is disconnected | Sensor `str` is not connected, please che
 Device is locked. | lowWaterLock = "Due to water shortage, GrowCube is locked. Please add water now and press the unlock button to unlock the GrowCube." duZhuanLock = "Due to the blocked up, GrowCube is locked. Please check the water outlet and water pipe immediately, and then press the unlock button to unlock GrowCube."
 The outlet is locked | Due to the sensor `str` is abnormall, the outlet `str.toLowerCase()` is locked. Please re-plug sensor `str` or replace with another sensor, and then press the unlock button to unlock GrowCube.
 
+##### The outlet is locked
+
+![The outlet is locked](assets/outlet_locked.png)
+
+##### Soil moisture sensor abnormality
+
+![Soil moisture sensor abnormality](assets/soil_moisture.png)
+
 ## Communication
 
 The device has an open TCP port on 8800. Connect to that using a raw socket, and it starts to periodically write out messages. It also support accepting commands.
