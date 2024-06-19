@@ -24,9 +24,7 @@ I used Airtool 2 to sniff network traffic between the app and the device. You co
 
 The end goal of this project was to create a Python Growcube client library, and ultimately a proper Home Assistant integration.
 
-The Python client is available on [PyPi](https://pypi.org/project/growcube-client/) , and repository is located [here](https://github.com/jonnybergdahl/Python-growcube-client).
-This repository also contains scripts to discover devices on the network, as well as a complete app that talks to a device. 
-
+The Python client is available on [PyPi](https://pypi.org/project/growcube-client/), and the source code repository is located [here](https://github.com/jonnybergdahl/Python-growcube-client). The repository also contains scripts to discover devices on the network, as well as a complete app that talks to a device. 
 
 The Home Assistant integration repository is located [here](https://github.com/jonnybergdahl/homeassistant_growcube).
 
