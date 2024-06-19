@@ -162,3 +162,4 @@ app/
 .hypothesis
 .DS_Store
 *.jadx
+*.cache

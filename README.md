@@ -26,7 +26,7 @@ The Python client is available on [PyPi](https://pypi.org/project/growcube-clien
 This repository also contains scripts to discover devices on the network, as well as a complete app that talks to a device. 
 
 
-The Home Assistant integration repository is located [here](https://github.com/jonnybergdahl/homeassistant_growcube). It is work in progress.
+The Home Assistant integration repository is located [here](https://github.com/jonnybergdahl/homeassistant_growcube).
 
 ## Android app reverse engineering
 
@@ -91,6 +91,44 @@ DatagramPacket datagramPacket = (DatagramPacket) obj;
                             String str = new String(datagramPacket.getData(), 0, datagramPacket.getLength());
                             LogUtil.d("ip:" + hostAddress + " id:" + str + " curid:" + NetManagerImp.curDevice.getIp());
 ```
+
+### GUI
+
+When the app connects to the device it waits for the device id and firmware version report. It then makes a HTTP request to `https://www.growcube.cc/software/2.4G/?v=<firmware version>`. It checks the return body
+for the text `当前已是最新版本!` (Translation: Currently the latest version!). If not, the returned string is the url to the latest firmware version, like in
+`https://www.growcube.cc/software/2.4G/GrowCube-Software_ESP8266_V4.1_2023-12-08.bin`.
+
+It then continues to listen for messages. When a message is rececived from the device it creates a `Message` that is submitted to the `com.elecrow.crowcube.ui.frg.onMsgReceive(msg)` function. This uses the field `msg.what` to identify what the message means.
+
+For the device messages, this mapping is used.
+
+Command value | msg.what | Comment
+---- | ----
+20 | 73 | Displays the dialog "Water shortage reminder"
+21 | 72 | Handle temperature and humidity
+22 | 71 | Not handled in `onMsgReceive()` 
+24 | 67 | If not connected to a WiFi named Growcube_*, switches to the update dialog
+26 | 70 | calls pumpOperationSucceded(arg, 1) - Decompile problem, but probably "pump open", This also updates the history.
+27 | 69 | calls pumpOperationSucceded(arg, 0) - Decompile problem, but probably "pump closed", This also updates the history.
+28 | 84 | Displays the dialog "Soil moisture sensor abnormality"
+29 | 85 | Displays the dialog "Device is blocked"
+30 | 89 | Displays the dialog "Soil moisture sensor is disconnected"
+31 | 86 | (Not handled) 
+32 | 87 | (Not handled)
+33 | 88 | Dialog "Device is locked."
+Data = x@n - n=1: lowWaterLock(), n=2: duZhuanLock()
+34 | 98 | Displays the dialog "The outlet is locked"
+
+#### Dialogs
+
+Dialog | Text
+---- | ----
+Water shortage reminder | GrowCube is out of water, please fill it now.
+Soil moisture sensor abnormality | Sensor `str` is abnormall, please check:please check whether it is damaged or improperly inserted
+Device is blocked | GrowCube is blocked, please check whether the water outlet, water pipe and nozzle are blocked.
+Soil moisture sensor is disconnected | Sensor `str` is not connected, please check whether it is connected normally.
+Device is locked. | lowWaterLock = "Due to water shortage, GrowCube is locked. Please add water now and press the unlock button to unlock the GrowCube." duZhuanLock = "Due to the blocked up, GrowCube is locked. Please check the water outlet and water pipe immediately, and then press the unlock button to unlock GrowCube."
+The outlet is locked | Due to the sensor `str` is abnormall, the outlet `str.toLowerCase()` is locked. Please re-plug sensor `str` or replace with another sensor, and then press the unlock button to unlock GrowCube.
 
 ## Communication
 
