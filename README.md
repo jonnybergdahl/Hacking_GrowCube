@@ -94,7 +94,7 @@ DatagramPacket datagramPacket = (DatagramPacket) obj;
 
 ## Communication
 
-The device has an open TCP port on 8800. Connect to that using a raw socket, and it starts to peridocally write out messages. It also support accepting commands.
+The device has an open TCP port on 8800. Connect to that using a raw socket, and it starts to periodically write out messages. It also support accepting commands.
 
 This is a sample output running Telnet, I just added a line feed to separate different messages.
 
