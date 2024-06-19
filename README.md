@@ -115,8 +115,7 @@ Command value | msg.what | Comment
 30 | 89 | Displays the dialog "Soil moisture sensor is disconnected"
 31 | 86 | (Not handled) 
 32 | 87 | (Not handled)
-33 | 88 | Dialog "Device is locked."
-Data = x@n - n=1: lowWaterLock(), n=2: duZhuanLock()
+33 | 88 | Dialog "Device is locked." Data = x@n - n=1: lowWaterLock(), n=2: duZhuanLock()
 34 | 98 | Displays the dialog "The outlet is locked"
 
 #### Dialogs
