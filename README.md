@@ -113,8 +113,8 @@ Command value | msg.what | Comment
 28 | 84 | Displays the dialog "Soil moisture sensor abnormality"
 29 | 85 | Displays the dialog "Device is blocked"
 30 | 89 | Displays the dialog "Soil moisture sensor is disconnected"
-31 | 86 | (Not handled) 
-32 | 87 | (Not handled)
+31 | 86 | (Not handled in GUI - WiFi state) 
+32 | 87 | (Not handled in GUI - IP config)
 33 | 88 | Dialog "Device is locked." Data = x@n - n=1: lowWaterLock(), n=2: duZhuanLock()
 34 | 98 | Displays the dialog "The outlet is locked"
 
