@@ -103,7 +103,7 @@ It then continues to listen for messages. When a message is rececived from the d
 For the device messages, this mapping is used.
 
 Command value | msg.what | Comment
----- | ----
+---- | ---- | ----
 20 | 73 | Displays the dialog "Water shortage reminder"
 21 | 72 | Handle temperature and humidity
 22 | 71 | Not handled in `onMsgReceive()` 
