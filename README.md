@@ -229,15 +229,15 @@ Value | Description | Attributes                                              | 
 22 | RepCurveCmd | Pump data, pumpnum, yearData[], monthData[], dateData[] |
 23 | RepAutoWaterCmd | pump #, time stamp divided (year, month, day, h, m)     |
 24 | RepDeviceVersionCmd | version number, device num                              | 3.6@12663500
-25 | RepErasureData | Erasure state                                           | elea25#3#52d# == true
+25 | RepErasureData | Erasure state                                       | elea25#3#52d# == true
 26 | RepPumpOpenCmd | pump #                                                  | 3
 27 | RepPumpCloseCmd | pump #                                                  | 3
-28 | ReqCheckSenSorCmd | sensor fault state                                      | 0 / 1 
+28 | ReqCheckSenSorCmd | sensor #                                      | 1 
 29 | ReqCheckDuZhuanCmd | pump outlet fault state                                 | 3
 30 | ReqCheckSenSorNotConnectCmd | state                                                   | 
 31 | RepWifistateCmd | state                                                   |
 32 | RepGrowCubeIPCmd | GrowCube IP                                             | ???
-33 | RepLockstateCmd | ?, state?                                               | 0@0 / 1@1
+33 | RepLockstateCmd | Sensor fault state                                       | 0@0 / 1@1
 34 | ReqCheckSenSorLockCmd | sensor locked state                                     | 3
 35 | RepCurveEndFlagCmd | ? end flag                                              | 0@1
 
