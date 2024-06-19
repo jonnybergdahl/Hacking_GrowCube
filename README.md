@@ -1,6 +1,6 @@
 # GrowCube_Hacking
 
-These are my notes reverse engineering the protocl used in Growcube. 
+These are my notes reverse engineering the protocol used in Growcube. 
 
 > Note: This is still a work in progress
 
@@ -63,7 +63,7 @@ Static values in `NetManagerImp`:
     public static final int PORT_WIFI_SETTING = 8800;
 ```
 
-The class `NetManagerImp` is responsiböe for communication with the Growcube. Functions in that class that seems interesting to implement in the Python library:
+The class `NetManagerImp` is responsible for communication with the Growcube. Functions in that class that seems interesting to implement in the Python library:
 
   - `water(i, i2)` (ReqWater(i, i2))
   - `getCurveData(i)` (ReqCurveData(i))
@@ -81,7 +81,7 @@ The class `NetManagerImp` is responsiböe for communication with the Growcube. F
   - `restoreFactoryMode()`
 
 
-There seems to be some kind of auto discovery implemented in `NetManagerImp`.
+There seems to be some kind of auto discovery implemented in `NetManagerImp`. Sniffing network traffic has not revelead any of theses packages, so I don't think it is used.
 
 ```Java
 sendBracastMsg(PORT_BROCAST, "crowcube", new INetCallback()
@@ -278,5 +278,5 @@ ele505 | ReqFactoryResetCmd
 ele506 | CheckDeviceOnlineCmd
 ele507 | ResetNetWrokModelCmd
 
- > Note: Any misspelled words are directly copied from the source code.
+ > Note: Any misspelled request/resonse words are directly copied from the source code.
 
