@@ -211,10 +211,10 @@ date.
 
 #### Request stop watering
 
+```
 > elea47#3#0@0#
 < elea27#1#0#
-
-
+```
 
 #### Idle traffic
 The Growcube continually sends out a "current state" data stream.
