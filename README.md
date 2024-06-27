@@ -277,6 +277,9 @@ Value | Description | Attributes                                              | 
 33 | RepLockstateCmd | Sensor fault state                                       | 0@0 / 1@1
 34 | ReqCheckSenSorLockCmd | sensor locked state                                     | 3
 35 | RepCurveEndFlagCmd | ? end flag                                              | 0@1
+36 | RepCurveEndFlagCmd_1 | Same as 36, but sends value 9 to the event bus | 0@1
+
+It seems the only message sent by pressing the button on the device, thus resetting the lock state, is RepWaterState 1?
 
 There also seems to be some responses that does not use the normal syntax.
 
