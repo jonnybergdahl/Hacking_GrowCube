@@ -4,7 +4,7 @@ These are my notes reverse engineering the protocol used in Growcube.
 
 > Note: This is still a work in progress
 
-You can reach me on [my channel on Brian Logh's Discord](https://discord.gg/3MSXn8Wsnj).
+You can reach me on [my channel on Brian Lough's Discord](https://discord.gg/3MSXn8Wsnj).
 
 ## Hardware
 
