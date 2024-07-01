@@ -126,7 +126,7 @@ Water shortage reminder || GrowCube is out of water, please fill it now.
 Soil moisture sensor abnormality | ![Soil moisture sensor abnormality](assets/soil_sensor_alarm.png) | Sensor `str` is abnormall, please check:please check whether it is damaged or improperly inserted
 Device is blocked || GrowCube is blocked, please check whether the water outlet, water pipe and nozzle are blocked.
 Soil moisture sensor is disconnected | ![Soil moisture sensor disconnected](assets/soil_sensor_disconnected.png) | Sensor `str` is not connected, please check whether it is connected normally.
-Device is locked. | ![Device is locked](assets/water_shortage.png) | lowWaterLock = "Due to water shortage, GrowCube is locked. Please add water now and press the unlock button to unlock the GrowCube." duZhuanLock = "Due to the blocked up, GrowCube is locked. Please check the water outlet and water pipe immediately, and then press the unlock button to unlock GrowCube."
+Device is locked. | ![Device is locked](assets/water_shortage.png) ![Device is blocked](assets/outlet_blocked.png) | lowWaterLock = "Due to water shortage, GrowCube is locked. Please add water now and press the unlock button to unlock the GrowCube." duZhuanLock = "Due to the blocked up, GrowCube is locked. Please check the water outlet and water pipe immediately, and then press the unlock button to unlock GrowCube."
 The outlet is locked | ![The outlet is locked](assets/outlet_locked.png) | Due to the sensor `str` is abnormall, the outlet `str.toLowerCase()` is locked. Please re-plug sensor `str` or replace with another sensor, and then press the unlock button to unlock GrowCube.
 
 ## Communication
