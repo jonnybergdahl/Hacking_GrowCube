@@ -211,12 +211,16 @@ The Growcube continually sends out a "current state" data stream.
 ```
 ## Add plant 1 (channel B), mode auto, min 15%, max 60%
 
+```
 > elea49#9#1@3@15@60#
+```
 
 ## Delete plant 1 (chanmel B)
 
+```
 > elea45#1#1#
 > elea46#1#1#
+```
 
 # Protocol
 
@@ -276,13 +280,13 @@ Value | Description | Attributes
 46 | ReqClosePump | pump #
 47 | ReqWater | pump #, state, 1 = Start pump, 0 = Stop pump 
 48 | ReqCurveData | pump #
-49 | ReqWaterMode | pump #, mode, min value, max value
+49 | ReqWaterMode | pump #, mode, value 1, value 2
 50 | ReqWifiSettings | WiFi name, WiFi password, "time mils" = KEY_DEVICE_ID
 
- > For command 49, mode 0 = Smart mode settings, 1 = Smart mode outside of daylight, 2 = Manual mode. <br>
- For Manual mode the last two values are interval and duration. 
+ > For command 49, mode 1 = Manual, mode 2 = Smart mode outside of daylight, 3 = Smart mode<br>
+ For Manual mode, value 1 = interval, value 2 = duration.<br>
+ For Smart mode, value 1 = min moisture, value 2 = max moisture
  
-
 There also seems to be some commands that does not use the normal syntax.
 
 Value | Description
