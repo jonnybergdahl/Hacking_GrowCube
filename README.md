@@ -30,6 +30,8 @@ The Python client is available on [PyPi](https://pypi.org/project/growcube-clien
 
 The Home Assistant integration repository is located [here](https://github.com/jonnybergdahl/homeassistant_growcube).
 
+The hardware docs were also very valuable for a ESPHome-based firmware which is located [here](https://github.com/MakersFunDuck/ESPhome-port-for-GrowCube-Plant-Watering-System-Garden---Smart-Watering-System).
+
 # Network
 
 ## Communication
