@@ -8,7 +8,7 @@ You can reach me on [my channel on Brian Lough's Discord](https://discord.gg/3MS
 
 ## Hardware
 
-This is the result o a teardown. There are 4 phillips screws under the rubber feet, and 2 torx screws under the label.
+This is the result of a teardown. There are 4 phillips screws under the rubber feet, and 2 torx screws under the label.
 
 ![PCB](assets/growcube_hardware_min.png)
 [Bigger image](assets/growcube_hardware.png)
@@ -37,7 +37,7 @@ This is the result o a teardown. There are 4 phillips screws under the rubber fe
 
 Left to right when viewing the GrowCube from behind: GND, SIG (ADC), NC, +5 V
 
-### USB Mirco-B pinout
+### USB Micro-B pinout
 
 * 1 (normally VCC): GND
 * 2 (normally RX): ESP8266 GPIO00 (Flash)
@@ -253,6 +253,27 @@ The Growcube continually sends out a "current state" data stream.
 > elea46#1#1#
 ```
 
+## Setup WiFi
+
+### Unsuccessful attempt (Wrong SSID)
+
+```
+> elea50]*34]*NONE}'password}'1751023501]*
+< elea31#1#1#
+< elea31#1#1#
+< elea31#1#1#
+```
+
+### Successful attempt
+
+```
+> elea50]*34]*SSID}'password}'1751023501]*
+> elea43#1#2#
+< elea32#12#172.30.2.192#
+< elea32#12#172.30.2.192#
+< elea32#12#172.30.2.192#
+
+```
 # Protocol
 
 The messages are composed by the following parts.
@@ -318,6 +339,14 @@ Value | Description | Attributes
  For Manual mode, value 1 = duration, value 2 = interval<br>
  For Smart modes, value 1 = min moisture, value 2 = max moisture
  
+> For command 50, the content is encoded by this code:
+```
+    public String get() {
+        String str = this.wifiName + "}'" + this.wifiPwd + "}'" + this.timeMils;
+        return "elea50]*" + str.length() + "]*" + str + "]*";
+    }
+```
+
 There also seems to be some commands that does not use the normal syntax.
 
 Value | Description
