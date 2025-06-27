@@ -16,6 +16,35 @@ This is the result o a teardown. There are 4 phillips screws under the rubber fe
 ![Pump and valves](assets/growcube_hardware_min2.png)
 [Bigger image](assets/growcube_hardware2.png)
 
+### GPIO use
+
+* RST: Reset button (button not soldered)
+* GPIO00: Flash button (button not soldered)
+* GPIO12: i2c clock
+* GPIO14: i2c data
+* GPIO16: not connected to anything? Should be connected to RST for deep sleep.
+
+### i2c addresses
+
+* i2c address 0x20: pca9554 IO
+* i2c address 0x38: DHT20
+* i2c address 0x40: ina219
+* i2c address 0x48: ads1115 ADC
+* i2c address 0x50: ?
+* i2c address 0x68: ?
+
+### Soil sensor pinout
+
+Left to right when viewing the GrowCube from behind: GND, SIG (ADC), NC, +5 V
+
+### USB Mirco-B pinout
+
+* 1 (normally VCC): GND
+* 2 (normally RX): ESP8266 GPIO00 (Flash)
+* 3 (normally TX): ESP8266 GPIO03 (RXD0)
+* 4 (normally NC): ESP8266 GPIO01 (TXD0)
+* 5 (normally GND): NC
+
 ## Tools used
 
 I used Airtool 2 to sniff network traffic between the app and the device. You connect the phone via USB and tell it to sniff all traffic on the phone, it then fires up Wireshark with the result.
